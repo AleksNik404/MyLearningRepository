@@ -11,28 +11,84 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-if (navigator.geolocation)
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      console.log(position);
+class App {
+  #map;
+  #mapEvent;
+  constructor() {
+    this._getPosition();
 
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      console.log(`https://www.google.ru/maps/@${latitude},${longitude}`);
+    form.addEventListener('submit', this._newWorkout.bind(this));
 
-      const coords = [latitude, longitude];
+    inputType.addEventListener('change', this._toggleElevationField);
+  }
 
-      const map = L.map('map').setView(coords, 13);
+  _getPosition() {
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(
+        this._loadMap.bind(this),
+        function () {
+          alert('Could not get your position');
+        }
+      );
+  }
 
-      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+  _loadMap(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    const coords = [latitude, longitude];
 
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
-    },
-    () => alert('Could not get your position')
-  );
+    this.#map = L.map('map').setView(coords, 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.#map);
+
+    L.marker(coords)
+      .addTo(this.#map)
+      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+      .openPopup();
+
+    //Handling clicks on map
+    this.#map.on('click', this._showForm.bind(this));
+  }
+
+  _showForm(mapE) {
+    this.#mapEvent = mapE;
+    form.classList.remove('hidden');
+    inputDistance.focus();
+  }
+
+  _toggleElevationField(e) {
+    e.preventDefault();
+    inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+  }
+
+  _newWorkout(e) {
+    e.preventDefault();
+    //Display Marker
+    const { lat, lng } = this.#mapEvent.latlng;
+    L.marker([lat, lng])
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: 'running-popup',
+        })
+      )
+      .setPopupContent('Workout')
+      .openPopup();
+
+    // Clear input fields
+    inputElevation.value = '';
+    inputDuration.value = '';
+    inputDistance.value = '';
+    inputCadence.value = '';
+  }
+}
+
+const app = new App();
