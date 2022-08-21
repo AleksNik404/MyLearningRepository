@@ -1,18 +1,19 @@
+// .shadow-fix {
+//     filter: drop-shadow(0 3rem 6rem rgba($color-black, 0.1));
+// }
+
 .story {
     font-size: $default-font-size;
-    width: 75%;
+    width: 80%;
     margin: 0 auto;
     padding: 6rem;
-    padding-left: 9rem;
+    padding-left: 12rem;
 
     border-radius: 3px;
     background-color: rgba($color-white, 0.6);
     box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
 
-    transform: skewX(-12deg);
-    & > * {
-        transform: skewX(12deg);
-    }
+    clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
 
     &__shape {
         width: 15rem;
@@ -22,7 +23,7 @@
         shape-outside: circle(50% at 50% 50%);
         clip-path: circle(50% at 50% 50%);
 
-        transform: translateX(-3rem) skewX(12deg);
+        transform: translateX(-3rem);
         position: relative;
     }
 
