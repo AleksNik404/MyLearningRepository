@@ -8,7 +8,7 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
-mongoose.connect(DB, {}).then((con) => {
+mongoose.connect(DB, {}).then(() => {
   // eslint-disable-next-line no-console
   console.log('DB connection successful!');
 });
