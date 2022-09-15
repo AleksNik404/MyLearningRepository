@@ -7,6 +7,5 @@
         "start": "node-sass main.scss style.css -w"
     },
     "author": "ZTM",
-    "license": "ISC",
-    "dependencies": {}
+    "license": "ISC"
 }
