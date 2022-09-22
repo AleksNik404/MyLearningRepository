@@ -26,12 +26,6 @@ app.use('/api/v1/tours', tourRoute);
 app.use('/api/v1/users', userRoute);
 
 app.all('*', (req, res, next) => {
-  // const err = new Error(
-  //   `HEEEEEEEEEEEEEEEEEEEELL Can't find ${req.originalUrl} on this server!`
-  // );
-  // err.status = 'fail';
-  // err.statusCode = 404;
-
   next(
     new AppError(
       `HEEEEEEEEEEEEEEEEEEEELL Can't find ${req.originalUrl} on this server!`,
