@@ -117,7 +117,7 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 
-tourSchema.post(/^find/, function (docs, next) {
+tourSchema.post(/^find/, (docs, next) => {
   next();
 });
 
