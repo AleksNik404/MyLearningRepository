@@ -30,8 +30,27 @@ function selectionSort(arr) {
   }
 }
 
-function mergeSort(arr) {}
+// Разбиваем рекурсивно массив на 2 части, пока не будет по 1 элементу. А потом применяем merge для соединения.
+function mergeSort(arr) {
+  if (arr.length === 1) return arr;
 
-function merge(left, right) {}
+  const center = Math.floor(arr.length / 2);
+  const left = arr.slice(0, center);
+  const right = arr.slice(center);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+// Соединение двух сортированных массивов в один сортированный массив
+function merge(left, right) {
+  const results = [];
+
+  while (left.length && right.length) {
+    if (left[0] < right[0]) results.push(left.shift());
+    if (left[0] >= right[0]) results.push(right.shift());
+  }
+
+  return [...results, ...left, ...right];
+}
 
 module.exports = { bubbleSort, selectionSort, mergeSort, merge };
