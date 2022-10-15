@@ -2,10 +2,10 @@
 let color: string[] = ['red', 'green', 'blue'];
 
 // Class
-class Car {
+class Car2 {
   //
 }
-let car: Car = new Car();
+let car: Car2 = new Car2();
 
 // Object literal
 let point: { x: number; y: number } = {

@@ -1,1 +1,0 @@
-const today = new Date();

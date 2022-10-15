@@ -1,11 +1,8 @@
-1. Jonas.io/3. JS/7. Forkify-project/node_modules
-1. Jonas.io/2. Adv_HTML_CSS/1) Natours Project (Part 1)/node_modules/
-1. Jonas.io/2. Adv_HTML_CSS/2) Trillo Project (flex)/node_modules
-1. Jonas.io/2. Adv_HTML_CSS/3) Nexter (Grid)/node_modules
-1. Jonas.io/4. NodeJS/1) Node-Farm/node_modules
-1. Jonas.io/4. NodeJS/0) Practice/test-file.txt
-1. Jonas.io/4. NodeJS/0) Practice/test-file.txt
-1. Jonas.io/4. NodeJS/2) Natours/node_modules
-1. Jonas.io/4. NodeJS/2) Natours/config.env
-2. ZTM/Junior-to-S/robot-friends/node_modules
+node_modules
 
+1. Jonas.io/4. NodeJS/0) Practice/test-file.txt
+1. Jonas.io/4. NodeJS/0) Practice/test-file.txt
+1. Jonas.io/4. NodeJS/2) Natours/config.env
+
+.cache
+dist
