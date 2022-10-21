@@ -83,10 +83,7 @@ app.use('/api/v1/reviews', reviewRoute);
 
 app.all('*', (req, res, next) => {
   next(
-    new AppError(
-      `HEEEEEEEEEEEEEEEEEEEELL Can't find ${req.originalUrl} on this server!`,
-      404
-    )
+    new AppError(`HEEELL Can't find ${req.originalUrl} on this server!`, 404)
   );
 });
 
