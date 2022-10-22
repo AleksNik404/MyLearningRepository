@@ -7,8 +7,10 @@ html
       link(rel='stylesheet' href='/css/style.css')
       link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
       link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
-      title Natours | #{title}
+      title Natours | #{title}      
+      
 
+      
   body
     // HEADER
     include _header
@@ -20,4 +22,6 @@ html
     // FOOTER
     include _footer
 
-    script(src='/js/mapbox.js')
+    script(type="module" src='/js/mapbox.js')
+
+    
