@@ -1,6 +1,10 @@
-const form = document.querySelector('.form');
+/* eslint-disable no-alert */
+/* eslint-disable no-undef */
 
-const login = async (email, password) => {
+import axios from 'axios';
+import { showAlert } from './alerts';
+
+export const login = async (email, password) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -10,17 +14,14 @@ const login = async (email, password) => {
         password,
       },
     });
-    console.log(res);
+
+    if (res.data.status === '') {
+      showAlert('success', 'logged in successfully');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1500);
+    }
   } catch (error) {
-    console.log(error.respone.data);
+    showAlert('error', error.response.data.message);
   }
 };
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-  login(email, password);
-});
