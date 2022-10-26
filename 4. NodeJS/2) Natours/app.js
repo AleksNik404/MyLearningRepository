@@ -45,6 +45,7 @@ app.use('/api', limiter);
 
 // Body parser, reading dat`a from body into rq.body
 app.use(express.json()); // middleware
+app.use(express.urlencoded({ extended: true, limit: '10kb' })); // middleware
 app.use(cookieParser());
 
 // Data sanitization agains NoSQL query injection

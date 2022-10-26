@@ -3,12 +3,15 @@
 import '@babel/polyfill';
 import { login, logout } from './login';
 import { displayMap } from './mapbox';
+import { updateSettings } from './updateSettings';
 
 // DOM ELEMENTS
 
 const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form');
 const logOutBtn = document.querySelector('.nav__el--logout');
+const userDataForm = document.querySelector('.form-user-data');
+const userPasswordForm = document.querySelector('.form-user-password');
 
 // VALUES
 
@@ -25,6 +28,33 @@ if (loginForm) {
     const password = document.getElementById('password').value;
     login(email, password);
   });
+}
 
-  if (logOutBtn) logOutBtn.addEventListener('click', logout);
+if (logOutBtn) logOutBtn.addEventListener('click', logout);
+
+if (userDataForm) {
+  userDataForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    updateSettings({ name, email }, 'data');
+  });
+}
+
+if (userPasswordForm) {
+  userPasswordForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    document.getElementById('.btn--save-password').textContent = 'Updating...';
+    const passwordCurrent = document.getElementById('password-current').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+    //prettier-ignore
+    await updateSettings({ passwordCurrent, password, passwordConfirm }, 'password');
+
+    document.getElementById('.btn--save-password').textContent =
+      'Save password';
+    document.getElementById('password-current').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('password-confirm').value = '';
+  });
 }
